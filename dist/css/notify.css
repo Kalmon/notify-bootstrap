@@ -1,79 +1,237 @@
-/*
- * notify-bootstrap 
- * v1.0.0
- * https://github.com/the-muda-organization/notify-bootstrap
- * MIT License
- */
+/****************************************
+                NOTIFY
+****************************************/
 
-/* main container for stacking toasts */
-.toast-container{
-    width:100%;
-    max-width:400px;
-    position:fixed;
-    bottom:0;
-    left:0;
-    z-index:1055;
-    padding:1rem;
-    -moz-user-select:none;
-    -ms-user-select:none;
-    user-select:none;
-    pointer-events:none;
+
+/* TOAST CONTAINER - for stacking toasts */
+
+#toast-container {
+    width: 100%;
+    max-width: 450px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 2000;
+    padding: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
-/* toast - ovverride from bootstrap */
-.toast{
-    width:100%;
-    max-width:400px; /* slightly bigger than bootstrap default 350px */
-    pointer-events:auto
+
+
+/* TOAST CONTAINER CONTENT - NOT LAST CHILD */
+
+#toast-container> :not(:last-child) {
+    margin-bottom: .75rem;
 }
-/* toast - style for notify not affecting bootstrap toast */
-.toast[data-type]{
-    position:relative;
-    border:0;
-    color:#f8f9fa;
-    background:linear-gradient(to bottom right,#4A4A4A,#2B2B2B);
-    box-shadow:0 2px 4px rgba(0,0,0,.5);
+
+
+/* TOAST - bootstrap ovverride */
+
+.toast {
+    width: 100%;
+    max-width: none;
 }
-/* toast content */
-.toast[data-type] .toast-content{
-    display:flex;
-    align-items:center;
-    padding-left:1rem;
+
+
+/* TOAST NOTIFY - style not affecting bootstrap toast */
+
+.toast[data-type] {
+    position: relative;
+    padding-left: 1rem;
+    background-image: linear-gradient(to bottom right, #4a4a4a, #2b2b2b);
+    color: var(--bs-white);
+    border: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
 }
-/* toast svg icon */
-.toast[data-type] .toast-icon svg{
+
+
+/* TOAST CLOSE BUTTON */
+
+.toast[data-type] .btn-close {
+    width: 1.25rem;
+    height: 1.25rem;
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    padding: 0;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-80 0 512 512' fill='%23000'%3e%3cpath d='M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z'/%3e%3c/svg%3e");
+    background-size: 80%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+}
+
+
+/* TOAST CLOSE BUTTON FOCUS */
+
+.toast[data-type] .btn-close:focus {
+    box-shadow: 0 0 0 .25rem rgba(66, 70, 73, .5);
+}
+
+
+/* TOAST CONTENT */
+
+.toast[data-type] .toast-content {
+    display: flex;
+    align-items: center;
+}
+
+
+/* TOAST ICON */
+
+.toast[data-type] .toast-icon {
+    /*
     width:35px;
     height:35px;
-    display:block;
-}
-/* toast body - it contains title and message */
-.toast[data-type] .toast-body{
-    width:100%;
-    padding-left:1rem;
-    text-align:justify;
-}
-/* toast close button */
-.toast[data-type] .close{
-    position:absolute;
-    top:0;
-    right:.25rem;
-    color:inherit;
+    background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='%23fff'%3e%3cpath d='M256.55 8C116.52 8 8 110.34 8 248.57c0 72.3 29.71 134.78 78.07 177.94 8.35 7.51 6.63 11.86 8.05 58.23A19.92 19.92 0 0 0 122 502.31c52.91-23.3 53.59-25.14 62.56-22.7C337.85 521.8 504 423.7 504 248.57 504 110.34 396.59 8 256.55 8zm149.24 185.13l-73 115.57a37.37 37.37 0 0 1-53.91 9.93l-58.08-43.47a15 15 0 0 0-18 0l-78.37 59.44c-10.46 7.93-24.16-4.6-17.11-15.67l73-115.57a37.36 37.36 0 0 1 53.91-9.93l58.06 43.46a15 15 0 0 0 18 0l78.41-59.38c10.44-7.98 24.14 4.54 17.09 15.62z'/%3e%3c/svg%3e");
+    background-size:contain;
+    background-position:50%;
+    background-repeat:no-repeat;
+    */
 }
 
 
-/* GENERAL */
-.toast[data-type="info"]   {background:linear-gradient(to bottom right,#007bff,#1d93d2)}
-.toast[data-type="warning"]{background:linear-gradient(to bottom right,#FF9500,#FC0);color:#343a40!important}
-.toast[data-type="error"]  {background:linear-gradient(to bottom right,#FF2A68,#FF5E3A)}
-.toast[data-type="success"]{background:linear-gradient(to bottom right,#28a745,#84b42d)}
-.toast[data-type="other"]  {background:linear-gradient(to bottom right,#4A4A4A,#2B2B2B)}
+/* TOAST ICON SVG */
+
+.toast[data-type] .toast-icon svg {
+    width: 35px;
+    height: 35px;
+    display: block;
+    /*display:none;*/
+}
+
+
+/* TOAST BODY - container for title and message */
+
+.toast[data-type] .toast-body {
+    flex: 2;
+    padding-left: 1rem;
+    text-align: justify;
+}
+
+
+/* TOAST TITLE */
+
+.toast[data-type] .toast-body .toast-title {
+    padding-right: 1rem;
+    font-weight: 700;
+}
+
+
+/* TOAST MESSAGE */
+
+.toast[data-type] .toast-body .toast-message {}
+
+
+/* GENERAL COLORS */
+
+.toast[data-type="info"] {
+    background-image: linear-gradient(to bottom right, #007bff, #1d93d2)
+}
+
+.toast[data-type="warning"] {
+    background-image: linear-gradient(to bottom right, #ff9500, #fc0);
+    color: var(--bs-dark)
+}
+
+.toast[data-type="error"] {
+    background-image: linear-gradient(to bottom right, #ff2a68, #ff5e3a)
+}
+
+.toast[data-type="success"] {
+    background-image: linear-gradient(to bottom right, #28a745, #84b42d)
+}
+
+.toast[data-type="other"] {
+    background-image: linear-gradient(to bottom right, #4a4a4a, #2b2b2b)
+}
+
 
 /* BRANDS */
-.toast[data-type="facebook"] {background:linear-gradient(to bottom right,#3B5998,#6d84b4)}
-.toast[data-type="github"]   {background:linear-gradient(to bottom right,#333,#373737)}
-.toast[data-type="instagram"]{background:linear-gradient(45deg,#f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)}
-.toast[data-type="linkedin"] {background:linear-gradient(to bottom right,#0077B5,#00a0dc)}
-.toast[data-type="paypal"]   {background:linear-gradient(to bottom right,#003087,#009cde)}
-.toast[data-type="skype"]    {background:linear-gradient(to bottom right,#00aff0,#0078d7)}
-.toast[data-type="twitter"]  {background:linear-gradient(to bottom right,#1DA1F2,#0084b4)}
-.toast[data-type="wikipedia"]{background:linear-gradient(to bottom right,#636466,#000)}
-.toast[data-type="youtube"]  {background:linear-gradient(to bottom right,#f00,#e62117)}
+
+.toast[data-type="amazon"] {
+    background-image: linear-gradient(#000 90%, #ff9900)
+}
+
+.toast[data-type="dropbox"] {
+    background-image: linear-gradient(to bottom right, #0061ff, #4d90ff)
+}
+
+.toast[data-type="facebook"] {
+    background-image: linear-gradient(to bottom right, #1778f2, #5fa2f6)
+}
+
+.toast[data-type="facebook-messenger"] {
+    background-image: linear-gradient(45deg, #0a7cff 0%, #a10eeb 60%, #ff5297 93%, #ff6c5c 100%)
+}
+
+.toast[data-type="flickr"] {
+    background-image: linear-gradient(90deg, #0063dc, #ff0084)
+}
+
+.toast[data-type="github"] {
+    background-image: linear-gradient(to bottom right, #333, #595959)
+}
+
+.toast[data-type="instagram"] {
+    background-image: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)
+}
+
+.toast[data-type="linkedin"] {
+    background-image: linear-gradient(to bottom right, #0077b5, #03a9ff)
+}
+
+.toast[data-type="paypal"] {
+    background-image: linear-gradient(to bottom right, #003087, #009cde)
+}
+
+.toast[data-type="pinterest"] {
+    background-image: linear-gradient(to bottom right, #e60023, #9a0017)
+}
+
+.toast[data-type="skype"] {
+    background-image: linear-gradient(to bottom right, #00aff0, #0077a4)
+}
+
+.toast[data-type="spotify"] {
+    background-image: linear-gradient(to bottom right, #1ed760, #1db954);
+    color: #191414
+}
+
+.toast[data-type="stack-overflow"] {
+    background-image: linear-gradient(to bottom right, #f48024, #c25b0a);
+    color: #2d2d2d
+}
+
+.toast[data-type="twitter"] {
+    background-image: linear-gradient(to bottom right, #1da1f2, #0b76b8)
+}
+
+.toast[data-type="vimeo"] {
+    background-image: linear-gradient(to bottom right, #1ab7ea, #0f83a8)
+}
+
+.toast[data-type="whatsapp"] {
+    background-image: linear-gradient(to bottom right, #60fc7d, #198e2e);
+    color: var(--bs-dark)
+}
+
+.toast[data-type="wikipedia"] {
+    background-image: linear-gradient(to bottom right, #636466, #000)
+}
+
+.toast[data-type="youtube"] {
+    background-image: linear-gradient(to bottom right, #f00, #b30000)
+}
+
+
+/*COLOR CONTRAST IMPROVEMENT*/
+
+.toast[data-type="warning"] .btn-close,
+.toast[data-type="spotify"] .btn-close,
+.toast[data-type="whatsapp"] .btn-close {
+    filter: none;
+}
